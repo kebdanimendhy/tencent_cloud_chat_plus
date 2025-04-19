@@ -8,14 +8,14 @@ class TencentCloudChatPlusNavigatorObserver extends NavigatorObserver {
 
   static TencentCloudChatPlusNavigatorObserver get instance => _instance;
 
-  void Function({required String name, required RouteSettings args})? _onPush;
-  void Function({required String name, required RouteSettings args})? _onPop;
-  void Function({required String name, required RouteSettings? args})? _onReplace;
+  void Function({required String name, required RouteSettings settings})? _onPush;
+  void Function({required String name, required RouteSettings settings})? _onPop;
+  void Function({required String name, required RouteSettings? settings})? _onReplace;
 
   void setHandler({
-    void Function({required String name, required RouteSettings args})? onPush,
-    void Function({required String name, required RouteSettings args})? onPop,
-    void Function({required String name, required RouteSettings? args})? onReplace,
+    void Function({required String name, required RouteSettings settings})? onPush,
+    void Function({required String name, required RouteSettings settings})? onPop,
+    void Function({required String name, required RouteSettings? settings})? onReplace,
   }) {
     _onPush = onPush ?? _onPush;
     _onPop = onPop ?? _onPop;
@@ -39,7 +39,7 @@ class TencentCloudChatPlusNavigatorObserver extends NavigatorObserver {
     if (_onPush == null) return;
     final name = _getTencentPageName(route);
     if (name == null) return;
-    _onPush!(name: name, args: route.settings);
+    _onPush!(name: name, settings: route.settings);
   }
 
   @override
@@ -49,7 +49,7 @@ class TencentCloudChatPlusNavigatorObserver extends NavigatorObserver {
     if (_onPop == null) return;
     final name = _getTencentPageName(route);
     if (name == null) return;
-    _onPop!(name: name, args: route.settings);
+    _onPop!(name: name, settings: route.settings);
   }
 
   @override
@@ -59,6 +59,6 @@ class TencentCloudChatPlusNavigatorObserver extends NavigatorObserver {
     if (_onReplace == null) return;
     final name = _getTencentPageName(oldRoute);
     if (name == null) return;
-    _onReplace!(name: name, args: oldRoute?.settings);
+    _onReplace!(name: name, settings: oldRoute?.settings);
   }
 }
