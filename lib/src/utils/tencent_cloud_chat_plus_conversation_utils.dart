@@ -1,0 +1,53 @@
+part of 'tencent_cloud_chat_plus_utils.dart';
+
+final class _TencetCloudChatPlusConversationUtils {
+  _TencetCloudChatPlusConversationUtils._();
+
+  final _presenter = TencentCloudChatConversationPresenter();
+
+  final sdk = TencentCloudChat.instance.chatSDKInstance.conversationSDK;
+
+  /// 置顶
+  Future<V2TimCallback?> togglePin(V2TimConversation conversation) {
+    final to = !conversation.isPin;
+    return sdk.pinConversation(
+      conversationID: conversation.conversationID,
+      isPinned: to,
+    );
+  }
+
+  /// 删除单个
+  Future<V2TimConversationOperationResult?> delete(V2TimConversation conversation,
+      {bool clearMessage = true}) async {
+    final success = await deleteMany([conversation]);
+    return success.firstOrNull;
+  }
+
+  /// 删除多个
+  Future<List<V2TimConversationOperationResult>> deleteMany(List<V2TimConversation> conversations,
+      {bool clearMessage = true}) async {
+    if (conversations.isEmpty) return [];
+    final ids = conversations.map((e) => e.conversationID).toList();
+    final res = await _presenter.cleanConversation(conversationIDList: ids, clearMessage: clearMessage);
+    if (!res.isOk) return [];
+    return res.data ?? [];
+  }
+
+  Future<V2TimCallback?> clearMessage(V2TimConversation conversation) async {
+    final userID = conversation.userID;
+    final groupID = conversation.groupID;
+    V2TimCallback? res;
+    if (TencentCloudChatUtils.checkString(userID) != null) {
+      res = await _messageManager.clearC2CHistoryMessage(userID: userID!);
+    }
+    if (TencentCloudChatUtils.checkString(groupID) != null) {
+      res = await _messageManager.clearGroupHistoryMessage(groupID: groupID!);
+    }
+    if (res == null) return res;
+    if (res.isOk) {
+      _messageData.clearMessageList(userID: userID, groupID: groupID);
+    }
+
+    return res;
+  }
+}
