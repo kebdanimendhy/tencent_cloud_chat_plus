@@ -10,11 +10,11 @@ extension V2TimConversationExtension on V2TimConversation {
   // 是否置顶
   bool get isPin => isPinned ?? false;
   // toggle置顶
-  Future<V2TimCallback?> togglePin() => TencentCloudChatPlusUtils.conversation.togglePin(this);
+  Future<V2TimCallback> togglePin() => TencentCloudChatPlusUtils.conversation.togglePin(this);
   // 删除
   Future<V2TimConversationOperationResult?> delete() => TencentCloudChatPlusUtils.conversation.delete(this);
   // 清空
-  Future<V2TimCallback?> clearMessage() => TencentCloudChatPlusUtils.conversation.clearMessage(this);
+  Future<V2TimCallback> clearMessage() => TencentCloudChatPlusUtils.conversation.clearMessage(this);
 }
 
 extension V2TimCallbackExt on V2TimCallback {

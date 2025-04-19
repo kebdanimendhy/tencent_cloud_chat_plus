@@ -8,7 +8,7 @@ final class _TencetCloudChatPlusConversationUtils {
   final sdk = TencentCloudChat.instance.chatSDKInstance.conversationSDK;
 
   /// 置顶
-  Future<V2TimCallback?> togglePin(V2TimConversation conversation) {
+  Future<V2TimCallback> togglePin(V2TimConversation conversation) {
     final to = !conversation.isPin;
     return sdk.pinConversation(
       conversationID: conversation.conversationID,
@@ -33,17 +33,17 @@ final class _TencetCloudChatPlusConversationUtils {
     return res.data ?? [];
   }
 
-  Future<V2TimCallback?> clearMessage(V2TimConversation conversation) async {
+  Future<V2TimCallback> clearMessage(V2TimConversation conversation) async {
     final userID = conversation.userID;
     final groupID = conversation.groupID;
-    V2TimCallback? res;
-    if (TencentCloudChatUtils.checkString(userID) != null) {
-      res = await _messageManager.clearC2CHistoryMessage(userID: userID!);
-    }
+    V2TimCallback res;
     if (TencentCloudChatUtils.checkString(groupID) != null) {
       res = await _messageManager.clearGroupHistoryMessage(groupID: groupID!);
+    } else if (TencentCloudChatUtils.checkString(userID) != null) {
+      res = await _messageManager.clearC2CHistoryMessage(userID: userID!);
+    } else {
+      res = V2TimCallback(code: 1, desc: 'bad ID');
     }
-    if (res == null) return res;
     if (res.isOk) {
       _messageData.clearMessageList(userID: userID, groupID: groupID);
     }
