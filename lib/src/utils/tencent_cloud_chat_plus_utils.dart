@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
 import 'package:tencent_cloud_chat_common/components/component_options/tencent_cloud_chat_message_options.dart';
+import 'package:tencent_cloud_chat_common/data/basic/tencent_cloud_chat_basic_data.dart';
 import 'package:tencent_cloud_chat_common/data/contact/tencent_cloud_chat_contact_data.dart';
 import 'package:tencent_cloud_chat_common/data/conversation/tencent_cloud_chat_conversation_data.dart';
 import 'package:tencent_cloud_chat_common/data/group_profile/tencent_cloud_chat_group_profile_data.dart';
@@ -24,13 +25,13 @@ import '../extension/tencent_cloud_chat_plus_extension.dart';
 import '../message/tencent_cloud_chat_plus_cache_message_layout.dart';
 import '../message/tencent_cloud_chat_plus_message_custom.dart';
 
+part 'tencent_cloud_chat_common_utils.dart';
 part 'tencent_cloud_chat_plus_contact_utils.dart';
 part 'tencent_cloud_chat_plus_conversation_utils.dart';
+part 'tencent_cloud_chat_plus_event_utils.dart';
 part 'tencent_cloud_chat_plus_group_utils.dart';
 part 'tencent_cloud_chat_plus_message_utils.dart';
 part 'tencent_cloud_chat_plush_navigator_utils.dart';
-part 'tencent_cloud_chat_plus_event_utils.dart';
-part 'tencent_cloud_chat_common_utils.dart';
 
 TencentCloudChat get _instance => TencentCloudChat.instance;
 V2TIMManager get _manager => _instance.chatSDKInstance.manager;
@@ -45,7 +46,7 @@ void _assertion(String tag, String log) {
   assert(false, '[$tag]:$log');
 }
 
-typedef TencentCloudChatPlusUtilsEventListenr<T> = void Function(T event);
+typedef TencentCloudChatPlusUtilsEventListener<T> = void Function(T event);
 
 final class TencentCloudChatPlusUtils {
   TencentCloudChatPlusUtils._();

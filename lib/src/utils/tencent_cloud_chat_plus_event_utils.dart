@@ -4,7 +4,7 @@ class _TencentCloudChatPlusEventUtils {
   _TencentCloudChatPlusEventUtils._();
 
   StreamSubscription<T> listen<T>(String componentName,
-      {required TencentCloudChatPlusUtilsEventListenr<T> listener, bool Function(T)? test}) {
+      {required TencentCloudChatPlusUtilsEventListener<T> listener, bool Function(T)? test}) {
     var stream = TencentCloudChat.instance.eventBusInstance.on<T>(componentName)!;
     if (test != null) {
       stream = stream.where(test);
@@ -15,7 +15,7 @@ class _TencentCloudChatPlusEventUtils {
   /// 群监听
   /// [TencentCloudChatGroupProfileDataKeys]
   StreamSubscription<TencentCloudChatGroupProfileData<T>> listenGroup<T>(
-          TencentCloudChatPlusUtilsEventListenr<TencentCloudChatGroupProfileData> listener,
+          TencentCloudChatPlusUtilsEventListener<TencentCloudChatGroupProfileData> listener,
           {bool Function(TencentCloudChatGroupProfileData)? test}) =>
       listen<TencentCloudChatGroupProfileData<T>>(
         TencentCloudChatEventBus.eventNameGroup,
@@ -26,7 +26,7 @@ class _TencentCloudChatPlusEventUtils {
   /// 消息监听
   /// [TencentCloudChatMessageDataKeys]
   StreamSubscription<TencentCloudChatMessageData<T>> listenMessage<T>(
-          TencentCloudChatPlusUtilsEventListenr<TencentCloudChatMessageData> listener,
+          TencentCloudChatPlusUtilsEventListener<TencentCloudChatMessageData> listener,
           {bool Function(TencentCloudChatMessageData)? test}) =>
       listen<TencentCloudChatMessageData<T>>(
         "TencentCloudChatMessageData",
@@ -37,7 +37,7 @@ class _TencentCloudChatPlusEventUtils {
   /// 会话监听
   /// [TencentCloudChatConversationDataKeys]
   StreamSubscription<TencentCloudChatConversationData<T>> listenConversation<T>(
-          TencentCloudChatPlusUtilsEventListenr<TencentCloudChatConversationData> listener,
+          TencentCloudChatPlusUtilsEventListener<TencentCloudChatConversationData> listener,
           {bool Function(TencentCloudChatConversationData)? test}) =>
       listen<TencentCloudChatConversationData<T>>(
         TencentCloudChatEventBus.eventNameConversation,
@@ -48,10 +48,21 @@ class _TencentCloudChatPlusEventUtils {
   /// contact监听
   /// [TencentCloudChatContactDataKeys]
   StreamSubscription<TencentCloudChatContactData<T>> listenContact<T>(
-          TencentCloudChatPlusUtilsEventListenr<TencentCloudChatContactData> listener,
+          TencentCloudChatPlusUtilsEventListener<TencentCloudChatContactData> listener,
           {bool Function(TencentCloudChatContactData)? test}) =>
       listen<TencentCloudChatContactData<T>>(
         TencentCloudChatEventBus.eventNameContact,
+        listener: listener,
+        test: test,
+      );
+
+  /// basic监听
+  /// [TencentCloudChatBasicDataKeys]
+  StreamSubscription<TencentCloudChatBasicData<T>> listenBasic<T>(
+          TencentCloudChatPlusUtilsEventListener<TencentCloudChatBasicData> listener,
+          {bool Function(TencentCloudChatBasicData)? test}) =>
+      listen<TencentCloudChatBasicData<T>>(
+        'TencentCloudChatBasicData',
         listener: listener,
         test: test,
       );
