@@ -20,6 +20,7 @@ import 'package:tencent_cloud_chat_conversation/model/tencent_cloud_chat_convers
 import 'package:tencent_cloud_chat_message/model/tencent_cloud_chat_message_data_tools.dart';
 import 'package:tencent_cloud_chat_message/model/tencent_cloud_chat_message_separate_data.dart';
 import 'package:tencent_cloud_chat_message/tencent_cloud_chat_message_controller.dart';
+import 'package:tencent_cloud_chat_plus/src/data/tencent_cloud_chat_plus_data.dart';
 
 import '../extension/tencent_cloud_chat_plus_extension.dart';
 import '../message/tencent_cloud_chat_plus_cache_message_layout.dart';
@@ -32,6 +33,7 @@ part 'tencent_cloud_chat_plus_event_utils.dart';
 part 'tencent_cloud_chat_plus_group_utils.dart';
 part 'tencent_cloud_chat_plus_message_utils.dart';
 part 'tencent_cloud_chat_plush_navigator_utils.dart';
+part 'tencent_cloud_chat_online_status_utils.dart';
 
 TencentCloudChat get _instance => TencentCloudChat.instance;
 V2TIMManager get _manager => _instance.chatSDKInstance.manager;
@@ -56,5 +58,6 @@ final class TencentCloudChatPlusUtils {
   static final message = _TencentCloudChatPlusMessageUtils._();
   static final group = _TencentCloudChatPlusGroupUtils._();
   static final event = _TencentCloudChatPlusEventUtils._();
+  static final onlineStatus = _TencentCloudChatOnlineStatusUtils._();
   static final common = _TencentCloudChatCommonUtils._();
 }

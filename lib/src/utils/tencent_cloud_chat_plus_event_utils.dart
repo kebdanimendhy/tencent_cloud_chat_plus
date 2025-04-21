@@ -66,4 +66,15 @@ class _TencentCloudChatPlusEventUtils {
         listener: listener,
         test: test,
       );
+
+  /// plus 监听
+  /// [TencentCloudChatPlusDataKeys]
+  StreamSubscription<TencentCloudChatPlusData<T>> listenPlus<T>(
+          TencentCloudChatPlusUtilsEventListener<TencentCloudChatPlusData> listener,
+          {bool Function(TencentCloudChatPlusData)? test}) =>
+      listen<TencentCloudChatPlusData<T>>(
+        TencentCloudChatPlusData.eventName,
+        listener: listener,
+        test: test,
+      );
 }

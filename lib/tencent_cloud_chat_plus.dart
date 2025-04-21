@@ -4,3 +4,5 @@ export 'src/message/tencent_cloud_chat_plus_message_custom.dart';
 export 'src/utils/tencent_cloud_chat_plus_utils.dart';
 export 'src/tencent_cloud_chat_plus_builders.dart';
 export 'src/tencent_cloud_chat_plus_navigator_observer.dart';
+export 'src/widgets/tencent_cloud_chat_plus_conversation_item_avatar.dart';
+export 'src/widgets//tencent_cloud_chat_plus_message_header_info.dart';

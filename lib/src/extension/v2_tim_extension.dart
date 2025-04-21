@@ -43,3 +43,7 @@ extension V2TimGroupMemberFullInfoExt on V2TimGroupMemberFullInfo {
   bool get isMember => role == GroupMemberRoleType.V2TIM_GROUP_MEMBER_ROLE_MEMBER;
   bool get isInvalid => role == GroupMemberRoleType.V2TIM_GROUP_MEMBER_UNDEFINED;
 }
+
+extension V2TimUserStatusExt on V2TimUserStatus {
+  bool get isOnline => statusType == 1;
+}
