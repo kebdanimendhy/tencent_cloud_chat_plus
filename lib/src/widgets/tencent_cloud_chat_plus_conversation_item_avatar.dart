@@ -4,10 +4,9 @@ import 'package:flutter/widgets.dart';
 import 'package:tencent_cloud_chat_common/base/tencent_cloud_chat_state_widget.dart';
 import 'package:tencent_cloud_chat_common/tencent_cloud_chat.dart';
 import 'package:tencent_cloud_chat_conversation/widgets/tencent_cloud_chat_conversation_item.dart';
-
-import '../data/tencent_cloud_chat_plus_data.dart';
-import '../extension/tencent_cloud_chat_plus_extension.dart';
-import '../utils/tencent_cloud_chat_plus_utils.dart';
+import 'package:tencent_cloud_chat_plus/src/data/tencent_cloud_chat_plus_data.dart';
+import 'package:tencent_cloud_chat_plus/src/extension/tencent_cloud_chat_plus_extension.dart';
+import 'package:tencent_cloud_chat_plus/src/utils/tencent_cloud_chat_plus_utils.dart';
 
 /// 对[TencentCloudChatConversationItemAvatar]封装
 /// [TencentCloudChatConversationItemAvatar]里面这个原来的这个在线状态是从contact里面获取的,
