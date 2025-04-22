@@ -47,3 +47,17 @@ extension V2TimGroupMemberFullInfoExt on V2TimGroupMemberFullInfo {
 extension V2TimUserStatusExt on V2TimUserStatus {
   bool get isOnline => statusType == 1;
 }
+
+extension V2TimUserFullInfoExt on V2TimUserFullInfo {
+  bool get isAllNull =>
+      userID == null &&
+      nickName == null &&
+      faceUrl == null &&
+      selfSignature == null &&
+      gender == null &&
+      allowType == null &&
+      customInfo == null &&
+      role == null &&
+      level == null &&
+      birthday == null;
+}

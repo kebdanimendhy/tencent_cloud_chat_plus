@@ -29,6 +29,8 @@ dev_dependencies:
   flutter_lints: ^5.0.0
 
 dependency_overrides:
+  tencent_cloud_chat_sdk: 8.5.6864+2
+
   tencent_cloud_chat_common:
     git:
       url: https://github.com/kebdanimendhy/tencent_cloud_chat_common.git

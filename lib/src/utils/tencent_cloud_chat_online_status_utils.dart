@@ -23,7 +23,7 @@ class _TencentCloudChatOnlineStatusUtils {
     final list = _revise(userIDs);
     final set = list.toSet();
     if (set.length == _subscribes.length && set.containsAll(_subscribes)) {
-      return V2TimCallback.fromBool(true, '');
+      return V2TimCallback(code: 0, desc: '');
     }
     await unsubscribeAll();
     return subscribe(list, getNow: true);
@@ -39,7 +39,7 @@ class _TencentCloudChatOnlineStatusUtils {
 
   Future<V2TimCallback> unsubscribe(List<String?> userIDs) async {
     final list = _revise(userIDs);
-    if (list.isEmpty) return V2TimCallback.fromBool(true, '');
+    if (list.isEmpty) return V2TimCallback(code: 0, desc: '');
     final res = await _manager.unsubscribeUserStatus(userIDList: list);
     if (res.isOk) {
       _subscribes.removeAll(list);
@@ -49,7 +49,7 @@ class _TencentCloudChatOnlineStatusUtils {
 
   Future<V2TimCallback> subscribe(List<String?> userIDs, {bool getNow = true}) async {
     final list = _revise(userIDs);
-    if (list.isEmpty) return V2TimCallback.fromBool(true, '');
+    if (list.isEmpty) return V2TimCallback(code: 0, desc: '');
     await unsubscribe(userIDs);
     final res = await _manager.subscribeUserStatus(userIDList: list);
     if (res.isOk) {

@@ -5,9 +5,9 @@ class _TencentCloudChatCommonUtils {
 
   // 设置自己的信息
   // https://comm.qq.com/im/doc/flutter/zh/SDKAPI/Api/V2TIMManager/setSelfInfo.html
-  Future<bool> setSelfInfo(V2TimUserFullInfo info) async {
-    final res = await _manager.setSelfInfo(userFullInfo: info);
-    return res.isOk;
+  Future<V2TimCallback> setSelfInfo(V2TimUserFullInfo info) async {
+    if (info.isAllNull) return V2TimCallback(code: 1, desc: 'null info');
+    return _manager.setSelfInfo(userFullInfo: info);
   }
 
   // 获取用户信息
