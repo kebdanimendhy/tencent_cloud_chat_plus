@@ -44,6 +44,13 @@ extension V2TimGroupMemberFullInfoExt on V2TimGroupMemberFullInfo {
   bool get isInvalid => role == GroupMemberRoleType.V2TIM_GROUP_MEMBER_UNDEFINED;
 }
 
+extension FindGroupMemberRoleExt on List<V2TimGroupMemberFullInfo> {
+  V2TimGroupMemberFullInfo? get owner => firstWhereOrNull((e) => e.isOwner);
+  List<V2TimGroupMemberFullInfo> get admins => where((e) => e.isAdmin).toList();
+  List<V2TimGroupMemberFullInfo> get members => where((e) => e.isMember).toList();
+  List<V2TimGroupMemberFullInfo> get invalids => where((e) => e.isInvalid).toList();
+}
+
 extension V2TimUserStatusExt on V2TimUserStatus {
   bool get isOnline => statusType == 1;
 }
