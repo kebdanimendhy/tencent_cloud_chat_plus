@@ -22,7 +22,7 @@ class TencentCloudChatPlusNavigatorObserver extends NavigatorObserver {
     _onReplace = onReplace ?? _onReplace;
   }
 
-  String? _getTencentPageName(Route? route) {
+  static String? getTencentPageName(Route? route) {
     if (route == null) return null;
     if (route is MaterialPageRoute) {
       for (final MapEntry(:key, :value) in TencentCloudChatRouter().routes.entries) {
@@ -37,7 +37,7 @@ class TencentCloudChatPlusNavigatorObserver extends NavigatorObserver {
     super.didPush(route, previousRoute);
 
     if (_onPush == null) return;
-    final name = _getTencentPageName(route);
+    final name = getTencentPageName(route);
     if (name == null) return;
     _onPush!(name: name, settings: route.settings);
   }
@@ -47,7 +47,7 @@ class TencentCloudChatPlusNavigatorObserver extends NavigatorObserver {
     super.didPop(route, previousRoute);
 
     if (_onPop == null) return;
-    final name = _getTencentPageName(route);
+    final name = getTencentPageName(route);
     if (name == null) return;
     _onPop!(name: name, settings: route.settings);
   }
@@ -57,7 +57,7 @@ class TencentCloudChatPlusNavigatorObserver extends NavigatorObserver {
     super.didReplace(newRoute: newRoute, oldRoute: oldRoute);
 
     if (_onReplace == null) return;
-    final name = _getTencentPageName(oldRoute);
+    final name = getTencentPageName(oldRoute);
     if (name == null) return;
     _onReplace!(name: name, settings: oldRoute?.settings);
   }
