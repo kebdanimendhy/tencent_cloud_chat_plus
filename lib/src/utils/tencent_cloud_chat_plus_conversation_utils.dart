@@ -7,6 +7,15 @@ final class _TencetCloudChatPlusConversationUtils {
 
   final sdk = TencentCloudChat.instance.chatSDKInstance.conversationSDK;
 
+  String? genID({String? userID, String? groupID, String? defaultValue}) {
+    if (TencentCloudChatUtils.checkString(groupID) != null) {
+      return 'group_$groupID';
+    } else if (TencentCloudChatUtils.checkString(userID) != null) {
+      return 'c2c_$userID';
+    }
+    return defaultValue;
+  }
+
   /// 置顶
   Future<V2TimCallback> togglePin(V2TimConversation conversation) {
     final to = !conversation.isPin;
