@@ -63,5 +63,6 @@ final class TencentCloudChatPlusUtils {
   static final common = _TencentCloudChatCommonUtils._();
 
   static V2TimUserFullInfo? get currentUser => _basic.currentUser;
-  static bool isSelf(String? userID) => userID != null && currentUser?.userID == userID;
+  static bool isSelf(String? userID) =>
+      TencentCloudChatUtils.checkString(userID) != null && currentUser?.userID == userID;
 }
