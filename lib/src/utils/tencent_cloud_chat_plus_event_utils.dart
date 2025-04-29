@@ -48,26 +48,30 @@ class _TencentCloudChatPlusEventUtils {
   /// 有条件的unreadCount总数
   /// [TencentCloudChatConversationData.totalUnreadCount] 这个是独立的的接口，读取未读总数,可以在conversationList未加载的情况下获取
   /// 这里是对converationList进行监听, 必须加载过conversationList才有数据
-  StreamSubscription<void> listenConversationUnreadCount(void Function(int unread) listener,
-      {bool Function(V2TimConversation)? filter}) {
-    return listenConversation(
-      (e) {
-        if (e.conversationList.isEmpty) {
-          listener(e.totalUnreadCount);
-          return;
-        }
-        Iterable<V2TimConversation> conversationList = e.conversationList;
-        if (filter != null) {
-          conversationList = e.conversationList.where(filter);
-        }
-        final count = conversationList.fold(0, (v, e) => v + (e.unreadCount ?? 0));
-        listener(count);
-      },
-      test: (e) =>
-          e.currentUpdatedFields == TencentCloudChatConversationDataKeys.conversationList ||
-          e.currentUpdatedFields == TencentCloudChatConversationDataKeys.totalUnreadCount,
-    );
-  }
+  StreamSubscription<void> listenConversationUnreadCount(
+          List<(bool Function(V2TimConversation)? filter, void Function(int) listener)> listeners) =>
+      listenConversation(
+        (e) {
+          if (e.conversationList.isEmpty) {
+            for (final pair in listeners) {
+              pair.$2(e.totalUnreadCount);
+            }
+            return;
+          }
+
+          for (final pair in listeners) {
+            Iterable<V2TimConversation> conversationList = e.conversationList;
+            if (pair.$1 != null) {
+              conversationList = conversationList.where(pair.$1!);
+            }
+            final count = conversationList.fold(0, (v, e) => v + (e.unreadCount ?? 0));
+            pair.$2(count);
+          }
+        },
+        test: (e) =>
+            e.currentUpdatedFields == TencentCloudChatConversationDataKeys.conversationList ||
+            e.currentUpdatedFields == TencentCloudChatConversationDataKeys.totalUnreadCount,
+      );
 
   /// contact监听
   /// [TencentCloudChatContactDataKeys]
