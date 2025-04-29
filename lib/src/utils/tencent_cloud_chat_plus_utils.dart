@@ -41,6 +41,7 @@ V2TIMMessageManager get _messageManager => _manager.getMessageManager();
 TencentCloudChatMessageData get _messageData => _instance.dataInstance.messageData;
 TencentCloudChatContactData get _contact => _instance.dataInstance.contact;
 TencentCloudChatGroupProfileData get _groupProfile => _instance.dataInstance.groupProfile;
+TencentCloudChatConversationData get _converstaion => _instance.dataInstance.conversation;
 TencentCloudChatLog get _log => _instance.logInstance;
 TencentCloudChatBasicData get _basic => _instance.dataInstance.basic;
 void _console(String tag, String log) => _log.console(componentName: tag, logs: log);

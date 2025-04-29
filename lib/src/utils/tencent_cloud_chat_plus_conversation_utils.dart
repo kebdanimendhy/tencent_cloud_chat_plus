@@ -59,4 +59,11 @@ final class _TencetCloudChatPlusConversationUtils {
 
     return res;
   }
+
+  int totalUnreadCountWithFilter({bool Function(V2TimConversation)? filter}) {
+    if (filter == null || _converstaion.conversationList.isEmpty) {
+      return _converstaion.totalUnreadCount;
+    }
+    return _converstaion.conversationList.where(filter).fold(0, (v, c) => v + (c.unreadCount ?? 0));
+  }
 }

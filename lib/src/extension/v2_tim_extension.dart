@@ -9,6 +9,13 @@ extension V2TimConversationExtension on V2TimConversation {
   bool get isInvalid => type == ConversationType.CONVERSATION_TYPE_INVALID;
   // 是否置顶
   bool get isPin => isPinned ?? false;
+  // 是否自己
+  bool get isSelf {
+    final currentUserID = TencentCloudChatPlusUtils.currentUser?.userID;
+    if (TencentCloudChatUtils.checkString(currentUserID) == null) return false;
+    return userID == currentUserID;
+  }
+
   // toggle置顶
   Future<V2TimCallback> togglePin() => TencentCloudChatPlusUtils.conversation.togglePin(this);
   // 删除
