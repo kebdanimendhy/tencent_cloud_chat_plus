@@ -1,6 +1,7 @@
 name: tencent_cloud_chat_plus
 description: "A new Flutter package project."
 version: 0.0.1
+publish_to: none
 homepage:
 
 environment:
@@ -22,6 +23,10 @@ dependencies:
   tencent_cloud_chat_message: ^3.2.1
   tencent_cloud_chat_conversation: ^3.2.1
   tencent_cloud_chat_contact: ^3.2.1
+  tencent_effect_flutter: 
+    git:
+      url: https://github.com/Tencent-RTC/TencentEffect_Flutter
+
 
 dev_dependencies:
   flutter_test:
